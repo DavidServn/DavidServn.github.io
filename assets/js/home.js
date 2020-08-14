@@ -10,6 +10,7 @@
 	});
 
 	$(function() {
+		$('body').addClass('loaded');
 
         var	$avatar = $('.avatar')
 
