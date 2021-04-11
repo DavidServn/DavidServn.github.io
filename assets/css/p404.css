@@ -1,0 +1,58 @@
+.p404-banner {
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+}
+
+.p404-banner:before {
+  content: '';
+  background-image: radial-gradient(rgba(23, 41, 56, 0.6) 70%, rgba(73, 99, 119, 0.6) 120%);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+}
+
+.p404-filter {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.7;
+}
+
+.p404-filter:before {
+  content: '';
+  background-image: radial-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0));
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+}
+
+.p404-container {
+  display: flex;
+}
+
+.p404-container-inner {
+  align-self: center;
+  width: 100%;
+}
+
+.p404-avatar {
+  width: 8rem;
+  height: 8rem;
+  line-height: 8rem;
+  background-size: 115%;
+  background-position: 70% 10%;
+  background-repeat: no-repeat;
+  margin-bottom: 25px;
+}

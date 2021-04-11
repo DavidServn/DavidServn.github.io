@@ -67,7 +67,7 @@
     </div>
   </div>
   <div class="uk-section uk-padding-remove-top uk-padding-medium-bottom">
-    <div id="blog-list" class="uk-container uk-section-default">
+    <div id="blog" class="uk-container uk-section-default">
       <p class="uk-text-secondary uk-margin-small-top uk-margin-remove-bottom">
         Follow me on <a target="_blank" href="https://twitter.com/DavidServn">Twitter</a>
         to be notified about new posts.</p>
@@ -79,75 +79,28 @@
   <script src="/assets/js/uikit/uikit-icons.min.js"></script>
   <script type="text/javascript">
     $.getJSON("/blog/posts.json", function (json) {
-      var itemsPerPage = 6;
+      const post = jQuery.grep(json.posts, function (e, _i) {
+        return e.slug == window.location.pathname.replace('/blog/', '').replace('.html', '');
+      })[0];
 
-      var page = getUrlParameter("p");
-      if (!page) { page = 1; }
-      else if (page < 1) { page = 1; }
+      if (!post) { window.location = "/blog"; }
 
-      var start = (page - 1) * itemsPerPage;
-      if (start >= json.posts.length) { window.location = "/blog" }
+      let d = new Date(post.date);
+      let ye = new Intl.DateTimeFormat('en', { year: 'numeric', timeZone: 'UTC' }).format(d);
+      let mo = new Intl.DateTimeFormat('en', { month: 'long', timeZone: 'UTC' }).format(d);
+      let da = new Intl.DateTimeFormat('en', { day: '2-digit', timeZone: 'UTC' }).format(d);
+      const date = `${mo} ${da}, ${ye}`;
 
-      var end = start + itemsPerPage;
-      if (end > json.posts.length) { end = json.posts.length; }
+      var content = `
+        <article class="uk-article uk-margin-large-top uk-margin-large-bottom">
+          <h1 class="uk-article-title text-accent-color">${post.title}</h1>
+          <p class="uk-article-meta text-accent-color">${date}</p>
+          ${post.content}
+        </article>
+        `
 
-      for (i = start; i < end; i++) {
-        const post = json.posts[i];
-
-        let d = new Date(post.date);
-        let ye = new Intl.DateTimeFormat('en', { year: 'numeric', timeZone: 'UTC' }).format(d);
-        let mo = new Intl.DateTimeFormat('en', { month: 'long', timeZone: 'UTC' }).format(d);
-        let da = new Intl.DateTimeFormat('en', { day: '2-digit', timeZone: 'UTC' }).format(d);
-        const date = `${mo} ${da}, ${ye}`;
-
-        var content = `
-          <article class="uk-article uk-margin-large-top uk-margin-large-bottom">
-            <h1 class="uk-article-title"><a class="text-accent-color" href="${post.slug}.html">${post.title}</a></h1>
-            <p class='uk-text-secondary'>${post.summary}</p>
-            <p class="uk-article-meta text-accent-color">${date}</p>
-          </article>
-          `
-
-        $('#blog-list').append(content);
-      }
-
-      var lastPage = Math.ceil(json.posts.length / itemsPerPage);
-      if (lastPage > 1) {
-        var pagination = `
-          <ul class="uk-pagination uk-flex-center uk-margin-medium-bottom" uk-margin>
-            ${page > 1 ? '<li><a href="/blog?p=' + (+page - 1) + '"><span uk-pagination-previous></span></a></li>' : ''}
-            ${page > 1 ? '<li><a href="/blog">1</a></li>' : ''}
-            ${+page - 3 > 1 ? '<li class="uk-disabled"><span>...</span></li>' : ''}
-            ${+page - 2 > 1 ? '<li><a href="/blog?p=' + (+page - 2) + '">' + (+page - 2) + '</a></li>' : ''}
-            ${+page - 1 > 1 ? '<li><a href="/blog?p=' + (+page - 1) + '">' + (+page - 1) + '</a></li>' : ''}
-            <li class="uk-active"><span>${page}</span></li>
-            ${+page + 1 < lastPage ? '<li><a href="/blog?p=' + (+page + 1) + '">' + (+page + 1) + '</a></li>' : ''}
-            ${+page + 2 < lastPage ? '<li><a href="/blog?p=' + (+page + 2) + '">' + (+page + 2) + '</a></li>' : ''}
-            ${+page + 3 < lastPage ? '<li class="uk-disabled"><span>...</span></li>' : ''}
-            ${page < lastPage ? '<li><a href="/blog?p=' + lastPage + '">' + lastPage + '</a></li>' : ''}
-            ${page < lastPage ? '<li><a href="/blog?p=' + (+page + 1) + '"><span uk-pagination-next></span></a></li>' : ''}
-          </ul>
-          `
-
-        $('#blog-list').append(pagination);
-      }
+      $('#blog').append(content);
     });
-
-    function getUrlParameter(sParam) {
-      var sPageURL = window.location.search.substring(1),
-        sURLVariables = sPageURL.split('&'),
-        sParameterName,
-        i;
-
-      for (i = 0; i < sURLVariables.length; i++) {
-        sParameterName = sURLVariables[i].split('=');
-
-        if (sParameterName[0] === sParam) {
-          return typeof sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
-        }
-      }
-      return false;
-    };
   </script>
 </body>
 
