@@ -34,6 +34,14 @@
   <title>David Servin - Blog</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <meta name="robots" content="index,follow">
+  <meta name="googlebot" content="index,follow">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@davidservn">
+  <meta name="twitter:creator" content="@davidservn">
+  <meta property="og:type" content="article">
+  <meta property="og:image:width" content="1350">
+  <meta property="og:image:height" content="900">
   <!-- icons -->
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
@@ -91,13 +99,25 @@
       let da = new Intl.DateTimeFormat('en', { day: '2-digit', timeZone: 'UTC' }).format(d);
       const date = `${mo} ${da}, ${ye}`;
 
+      var headContent = `
+        <meta name="description" content="${post.summary}">
+        <meta property="og:title" content="${post.title}">
+        <meta property="og:url" content="https://davidservn.com/blog/${post.slug}.html">
+        <meta property="article:published_time" content="${post.date}">
+        <meta property="og:description" content="${post.summary}">
+        <meta property="og:image" content="https://davidservn.com/assets/images/blog/meta/${post.slug}.png">
+        <meta property="og:image:alt" content="${post.title}">
+        `;
+      document.title = post.title;
+      $("head").append(headContent);
+
       var content = `
         <article class="uk-article uk-margin-large-top uk-margin-large-bottom">
           <h1 class="uk-article-title text-accent-color">${post.title}</h1>
           <p class="uk-article-meta text-accent-color">${date}</p>
           ${post.content}
         </article>
-        `
+        `;
 
       $('#blog').append(content);
     });
