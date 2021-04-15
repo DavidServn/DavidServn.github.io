@@ -29,6 +29,7 @@
     In outer space
     It's the only way
 -->
+
 <head>
   <title>David Servin - Blog</title>
   <meta charset="utf-8" />
@@ -67,8 +68,8 @@
   <link rel="stylesheet" href="/assets/css/blog.css">
 </head>
 
-<body style="background-image: url(/assets/images/bg-blog.png)">
-  <div class="uk-section uk-light uk-padding-medium-bottom">
+<body>
+  <div class="uk-section uk-light uk-padding-remove-bottom">
     <div class="uk-container uk-section-secondary uk-light uk-padding-medium-top uk-padding-medium-bottom">
       <h1 class="uk-heading-line uk-text-center header-title"><span>I think sometimes</span></h1>
       <div>
@@ -80,10 +81,11 @@
     </div>
   </div>
   <div class="uk-section uk-padding-remove-top uk-padding-medium-bottom">
-    <div id="blog-list" class="uk-container uk-section-default">
-      <p class="uk-text-secondary uk-margin-small-top uk-margin-remove-bottom">
+    <div class="uk-container uk-section-secondary uk-preserve-color">
+      <p class="uk-text-secondary uk-margin-remove">
         Follow me on <a target="_blank" href="https://twitter.com/DavidServn">Twitter</a>
         to be notified about new posts.</p>
+      <div id="blog-list"></div>
     </div>
   </div>
 
@@ -92,7 +94,7 @@
   <script src="/assets/js/uikit/uikit-icons.min.js"></script>
   <script type="text/javascript">
     $.getJSON("/blog/posts.json", function (json) {
-      var itemsPerPage = 6;
+      var itemsPerPage = 5;
 
       var page = getUrlParameter("p");
       if (!page) { page = 1; }
@@ -115,10 +117,11 @@
 
         var content = `
           <article class="uk-article uk-margin-large-top uk-margin-large-bottom">
-            <h1 class="uk-article-title"><a class="text-accent-color" href="${post.slug}.html">${post.title}</a></h1>
+            <p class="uk-article-meta">${date}</p>
+            <h1 class="uk-article-title"><a class="text-accent-color-light" href="${post.slug}.html">${post.title}</a></h1>
             <p class='uk-text-secondary'>${post.summary}</p>
-            <p class="uk-article-meta text-accent-color">${date}</p>
           </article>
+          <hr>
           `;
 
         $('#blog-list').append(content);

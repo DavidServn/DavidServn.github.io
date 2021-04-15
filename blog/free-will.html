@@ -29,6 +29,7 @@
     In outer space
     It's the only way
 -->
+
 <head>
   <title>David Servin - Blog</title>
   <meta charset="utf-8" />
@@ -41,7 +42,8 @@
   <meta property="og:title" content="Free Will?">
   <meta property="og:image:alt" content="Free Will?">
   <meta name="description" content="Some thoughts on “Do We Have Free Will? Maybe It Doesn't Matter” by Jim Davies.">
-  <meta property="og:description" content="Some thoughts on “Do We Have Free Will? Maybe It Doesn't Matter” by Jim Davies.">
+  <meta property="og:description"
+    content="Some thoughts on “Do We Have Free Will? Maybe It Doesn't Matter” by Jim Davies.">
   <meta property="og:url" content="https://davidservn.com/blog/free-will.html">
   <meta property="og:type" content="article">
   <meta property="article:published_time" content="2021-04-10">
@@ -68,8 +70,8 @@
   <link rel="stylesheet" href="/assets/css/blog.css">
 </head>
 
-<body style="background-image: url(/assets/images/bg-blog.png)">
-  <div class="uk-section uk-light uk-padding-medium-bottom">
+<body>
+  <div class="uk-section uk-light uk-padding-remove-bottom">
     <div class="uk-container uk-section-secondary uk-light uk-padding-medium-top uk-padding-medium-bottom">
       <h1 class="uk-heading-line uk-text-center header-title"><span>I think sometimes</span></h1>
       <div>
@@ -81,10 +83,13 @@
     </div>
   </div>
   <div class="uk-section uk-padding-remove-top uk-padding-medium-bottom">
-    <div id="blog" class="uk-container uk-section-default">
-      <p class="uk-text-secondary uk-margin-small-top uk-margin-remove-bottom">
+    <div class="uk-container uk-section-secondary uk-preserve-color">
+      <div id="blog"></div>
+      <li class="uk-text-center nav-link"><a href="/blog"><span>More posts</span></a></li>
+      <p class="uk-text-secondary uk-margin-remove">
         Follow me on <a target="_blank" href="https://twitter.com/DavidServn">Twitter</a>
         to be notified about new posts.</p>
+      <h1 class="uk-heading-line uk-text-center end-line"><span>X</span></h1>
     </div>
   </div>
 
@@ -112,8 +117,8 @@
 
       var content = `
         <article class="uk-article uk-margin-large-top uk-margin-large-bottom">
-          <h1 class="uk-article-title text-accent-color">${post.title}</h1>
-          <p class="uk-article-meta text-accent-color">${date}</p>
+          <p class="uk-article-meta">${date}</p>
+          <h1 class="uk-article-title text-accent-color-light">${post.title}</h1>
           ${post.content}
         </article>
         `;
