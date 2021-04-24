@@ -5,8 +5,11 @@
 }
 
 .p404-banner:before {
-  content: '';
-  background-image: radial-gradient(rgba(23, 41, 56, 0.6) 70%, rgba(73, 99, 119, 0.6) 120%);
+  content: "";
+  background-image: radial-gradient(
+    rgba(23, 41, 56, 0.6) 70%,
+    rgba(73, 99, 119, 0.6) 120%
+  );
   width: 100%;
   height: 100%;
   position: absolute;
@@ -28,7 +31,7 @@
 }
 
 .p404-filter:before {
-  content: '';
+  content: "";
   background-image: radial-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0));
   width: 100%;
   height: 100%;
